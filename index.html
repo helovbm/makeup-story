@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glow & Delicate - Portal de Maquiagem</title>
+  <title>Glow Beauty - Portal de Maquiagem</title>
   <style>
-    /* ESTILOS E DESIGN DELICADO (CSS) */
+    /* ESTILOS CSS */
     :root {
       --bg-color: #faf6f0;
       --card-bg: #ffffff;
@@ -31,7 +31,7 @@
     header {
       background-color: var(--card-bg);
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem 1.5rem;
       border-bottom: 1px solid #ebdada;
     }
 
@@ -40,31 +40,60 @@
       color: var(--dark-pink);
       letter-spacing: 2px;
       font-weight: 300;
+      margin-bottom: 0.5rem;
     }
 
-    nav {
+    header p {
+      font-size: 1rem;
+      color: #8a7e78;
+    }
+
+    /* NAVEGAÇÃO POR ABAS */
+    .tabs-nav {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      margin-top: 1rem;
+      gap: 10px;
+      background-color: var(--card-bg);
+      padding: 10px;
+      border-bottom: 1px solid #f0e2e2;
+      flex-wrap: wrap;
     }
 
-    nav a {
-      text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 500;
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 12px 24px;
       font-size: 0.95rem;
-      transition: color 0.3s;
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      border-radius: 20px;
+      transition: all 0.3s ease;
     }
 
-    nav a:hover {
+    .tab-btn:hover {
+      background-color: #f7e8e8;
       color: var(--dark-pink);
     }
 
+    .tab-btn.active {
+      background-color: var(--primary-pink);
+      color: white;
+    }
+
+    /* CONTEÚDO DAS ABAS */
     .container {
       max-width: 1000px;
       margin: 2rem auto;
       padding: 0 1rem;
+    }
+
+    .tab-content {
+      display: none; /* Esconde todas as abas por padrão */
+    }
+
+    .tab-content.active {
+      display: block; /* Exibe apenas a aba ativa */
     }
 
     .section-title {
@@ -75,18 +104,17 @@
       font-weight: 400;
     }
 
-    /* GRID DE PASSO A PASSO E PRODUTOS */
+    /* GRIDS DE CARDS COM IMAGEM */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
-      margin-bottom: 3rem;
     }
 
     .card {
       background: var(--card-bg);
       border-radius: 12px;
-      padding: 1.5rem;
+      overflow: hidden;
       box-shadow: 0 4px 15px rgba(0,0,0,0.03);
       border: 1px solid #f0e2e2;
       transition: transform 0.3s;
@@ -96,30 +124,94 @@
       transform: translateY(-4px);
     }
 
-    .card h3 {
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .card-body h3 {
       color: var(--dark-pink);
       margin-bottom: 0.5rem;
     }
 
-    /* ÁREA INTERATIVA: QUIZ */
+    /* ÁREA INTERATIVA 1: TESTADOR VIRTUAL */
+    .tester-container {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid #f0e2e2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-box {
+      text-align: center;
+    }
+
+    .lip-preview {
+      width: 180px;
+      height: 90px;
+      border-radius: 45px;
+      border: 3px solid #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: white;
+      font-weight: bold;
+      transition: background-color 0.4s;
+      margin-bottom: 10px;
+    }
+
+    .color-palette {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    .color-dot {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      transition: transform 0.2s;
+    }
+
+    .color-dot:hover {
+      transform: scale(1.15);
+    }
+
+    /* ÁREA INTERATIVA 2: QUIZ */
     .quiz-container {
       background: var(--card-bg);
       border-radius: 12px;
       padding: 2rem;
       border: 1px solid #f0e2e2;
-      margin-bottom: 3rem;
       text-align: center;
     }
 
     .quiz-option {
       display: inline-block;
-      margin: 10px;
-      padding: 10px 20px;
+      margin: 8px;
+      padding: 10px 22px;
       background: var(--bg-color);
       border: 1px solid var(--primary-pink);
       border-radius: 20px;
       cursor: pointer;
       transition: all 0.3s;
+      font-weight: 500;
     }
 
     .quiz-option:hover {
@@ -129,144 +221,159 @@
 
     .result-box {
       margin-top: 1.5rem;
-      font-weight: bold;
+      padding: 15px;
+      border-radius: 8px;
+      background-color: var(--bg-color);
+      font-weight: 600;
       color: var(--dark-pink);
-    }
-
-    /* ÁREA INTERATIVA: TESTADOR DE BATOM */
-    .tester-section {
-      background: var(--card-bg);
-      padding: 2rem;
-      border-radius: 12px;
-      border: 1px solid #f0e2e2;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .lip-preview {
-      width: 150px;
-      height: 80px;
-      border-radius: 40px;
-      border: 2px solid #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      color: white;
-      transition: background-color 0.4s;
-    }
-
-    .color-palette {
-      display: flex;
-      gap: 12px;
-    }
-
-    .color-dot {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 2px solid white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>GLOW & DELICATE</h1>
-    <nav>
-      <a href="#passo-a-passo">Passo a Passo</a>
-      <a href="#produtos">Produtos</a>
-      <a href="#quiz">Quiz de Pele</a>
-      <a href="#testador">Testador Virtual</a>
-    </nav>
+    <h1>GLOW BEAUTY</h1>
+    <p>Seu guia de maquiagem moderno e delicado</p>
   </header>
+
+  <nav class="tabs-nav">
+    <button class="tab-btn active" onclick="openTab(event, 'passo-a-passo')">Passo a Passo</button>
+    <button class="tab-btn" onclick="openTab(event, 'produtos')">Produtos</button>
+    <button class="tab-btn" onclick="openTab(event, 'testador')">Testador Virtual</button>
+    <button class="tab-btn" onclick="openTab(event, 'quiz')">Quiz de Pele</button>
+  </nav>
 
   <div class="container">
 
-    <!-- SEÇÃO PASSO A PASSO -->
-    <h2 id="passo-a-passo" class="section-title">Passo a Passo Essencial</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>1. Preparação</h3>
-        <p>Lave o rosto, aplique um tônico suave e um hidratante leve para garantir aderência.</p>
-      </div>
-      <div class="card">
-        <h3>2. Uniformização</h3>
-        <p>Aplique o primer nas áreas de poros e distribua a base do centro para as extremidades.</p>
-      </div>
-      <div class="card">
-        <h3>3. Olhos e Boca</h3>
-        <p>Esfume tons neutros no côncavo e finalize com o batom de sua preferência.</p>
-      </div>
-    </div>
-
-    <!-- SEÇÃO VARIETÁRIA DE PRODUTOS -->
-    <h2 id="produtos" class="section-title">Guia de Produtos</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Bases Leves</h3>
-        <p>Ideais para o dia a dia, entregam viço natural e cobertura ajustável.</p>
-      </div>
-      <div class="card">
-        <h3>Blush em Creme</h3>
-        <p>Confere um ar saudável e delicado com acabamento hidratado.</p>
-      </div>
-      <div class="card">
-        <h3>Máscaras de Cílios</h3>
-        <p>Fórmulas alongadoras que destacam o olhar sem empelotar.</p>
+    <div id="passo-a-passo" class="tab-content active">
+      <h2 class="section-title">Tutoriais Passo a Passo</h2>
+      <div class="grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&q=80" alt="Preparação de Pele">
+          <div class="card-body">
+            <h3>1. Skincare Pré-Make</h3>
+            <p>Limpe, tonifique e hidrate bem a pele para que a maquiagem dure o dia todo sem craquelar.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=500&q=80" alt="Pele Leve e Natural">
+          <div class="card-body">
+            <h3>2. Cobertura Uniforme</h3>
+            <p>Aplique a base do centro para as bordas do rosto usando uma esponja úmida para acabamento natural.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1583241800698-e8ab01c85b27?w=500&q=80" alt="Maquiagem nos Olhos">
+          <div class="card-body">
+            <h3>3. Olhos Esfumados</h3>
+            <p>Use tons terrosos no côncavo para criar profundidade e finalize com máscara de cílios.</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- INTERATIVIDADE 1: QUIZ RÁPIDO -->
-    <div id="quiz" class="quiz-container">
-      <h2 class="section-title">Descubra sua Base Ideal</h2>
-      <p>Qual é o seu tipo de pele?</p>
-      <div class="quiz-option" onclick="recomendarBase('oleosa')">Oleosa</div>
-      <div class="quiz-option" onclick="recomendarBase('seca')">Seca</div>
-      <div class="quiz-option" onclick="recomendarBase('mista')">Mista</div>
-      <div id="quizResult" class="result-box"></div>
+    <div id="produtos" class="tab-content">
+      <h2 class="section-title">Catálogo de Indicações</h2>
+      <div class="grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=500&q=80" alt="Bases e Corretivos">
+          <div class="card-body">
+            <h3>Bases Fluídas</h3>
+            <p>Ideais para quem busca cobertura leve a média com viço e aspecto de pele saudável.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500&q=80" alt="Paleta de Sombras">
+          <div class="card-body">
+            <h3>Paletas Neutras</h3>
+            <p>Versáteis para criar desde maquiagens simples de trabalho até looks elaborados para a noite.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=500&q=80" alt="Batons e Lip Gloss">
+          <div class="card-body">
+            <h3>Glosses & Lip Oils</h3>
+            <p>Hidratam os lábios enquanto entregam brilho delicado e sensação confortável.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- INTERATIVIDADE 2: TESTADOR VIRTUAL -->
-    <h2 id="testador" class="section-title">Testador de Tons Labiais</h2>
-    <div class="tester-section">
-      <div id="lipPreview" class="lip-preview" style="background-color: #d8a7a7;">
-        Tom Selecionado
+    <div id="testador" class="tab-content">
+      <h2 class="section-title">Testador de Tons de Batom</h2>
+      <div class="tester-container">
+        <div class="preview-box">
+          <div id="lipPreview" class="lip-preview" style="background-color: #d8a7a7;">
+            Tom Selecionado
+          </div>
+          <p id="colorName">Nude Clássico</p>
+        </div>
+        <div>
+          <p style="margin-bottom: 10px; font-weight: 600;">Clique nas cores para testar:</p>
+          <div class="color-palette">
+            <div class="color-dot" style="background-color: #c85a5a;" onclick="trocarCor('#c85a5a', 'Vermelho Suave')"></div>
+            <div class="color-dot" style="background-color: #b03a48;" onclick="trocarCor('#b03a48', 'Vinho Elegante')"></div>
+            <div class="color-dot" style="background-color: #d68092;" onclick="trocarCor('#d68092', 'Rosa Queimado')"></div>
+            <div class="color-dot" style="background-color: #8c3b4f;" onclick="trocarCor('#8c3b4f', 'Ameixa Amadeirado')"></div>
+            <div class="color-dot" style="background-color: #d8a7a7;" onclick="trocarCor('#d8a7a7', 'Nude Clássico')"></div>
+          </div>
+        </div>
       </div>
-      <div class="color-palette">
-        <div class="color-dot" style="background-color: #c85a5a;" onclick="trocarCor('#c85a5a')"></div>
-        <div class="color-dot" style="background-color: #b03a48;" onclick="trocarCor('#b03a48')"></div>
-        <div class="color-dot" style="background-color: #d68092;" onclick="trocarCor('#d68092')"></div>
-        <div class="color-dot" style="background-color: #8c3b4f;" onclick="trocarCor('#8c3b4f')"></div>
+    </div>
+
+    <div id="quiz" class="tab-content">
+      <h2 class="section-title">Quiz: Descubra os Produtos para Sua Pele</h2>
+      <div class="quiz-container">
+        <p style="margin-bottom: 15px;">Qual é o seu tipo principal de pele?</p>
+        <div class="quiz-option" onclick="recomendarBase('oleosa')">Oleosa</div>
+        <div class="quiz-option" onclick="recomendarBase('seca')">Seca</div>
+        <div class="quiz-option" onclick="recomendarBase('mista')">Mista / Normal</div>
+        
+        <div id="quizResult" class="result-box" style="display: none;"></div>
       </div>
     </div>
 
   </div>
 
   <script>
-    /* LÓGICA INTERATIVA (JAVASCRIPT) */
+    /* LÓGICA JAVASCRIPT */
+
+    // Alternar entre as Abas
+    function openTab(evt, tabId) {
+      // Esconde todos os conteúdos das abas
+      const tabContents = document.querySelectorAll('.tab-content');
+      tabContents.forEach(content => content.classList.remove('active'));
+
+      // Remove a classe 'active' de todos os botões
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+
+      // Mostra a aba atual e adiciona a classe 'active' ao botão clicado
+      document.getElementById(tabId).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+
+    // Testador Virtual de Batom
+    function trocarCor(hexColor, nomeCor) {
+      const preview = document.getElementById('lipPreview');
+      const label = document.getElementById('colorName');
+      
+      preview.style.backgroundColor = hexColor;
+      label.innerText = nomeCor;
+    }
 
     // Quiz de Recomendação
     function recomendarBase(tipoPele) {
       const resultDiv = document.getElementById('quizResult');
-      if(tipoPele === 'oleosa') {
-        resultDiv.innerText = "Recomendação: Base Matte com acabamento toque seco e sem óleo.";
-      } else if(tipoPele === 'seca') {
-        resultDiv.innerText = "Recomendação: Base Serum ou Fluida com ácido hialurônico.";
-      } else {
-        resultDiv.innerText = "Recomendação: Base Semi-matte ou Satin para equilíbrio natural.";
-      }
-    }
+      resultDiv.style.display = 'block';
 
-    // Testador Virtual de Batom
-    function trocarCor(cor) {
-      const preview = document.getElementById('lipPreview');
-      preview.style.backgroundColor = cor;
+      if(tipoPele === 'oleosa') {
+        resultDiv.innerText = "Recomendação: Aposte em bases matte sem óleo (oil-free), pó translúcido e primer com efeito máficos/poros.";
+      } else if(tipoPele === 'seca') {
+        resultDiv.innerText = "Recomendação: Escolha bases fluídas com ácido hialurônico, blushes cremosos e bruma hidratante para finalizar.";
+      } else {
+        resultDiv.innerText = "Recomendação: Utilize bases de acabamento acetinado e sele com pó apenas a zona T (testa, nariz e queixo).";
+      }
     }
   </script>
 </body>
