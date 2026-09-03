@@ -1,6 +1,8 @@
-// Seleciona um botão na página e adiciona um evento de clique
-const botao = document.querySelector('.meu-botao');
+// Exibe uma mensagem simples no console do navegador
+console.log("Olá, mundo!");
 
-botao.addEventListener('click', () => {
-  alert('Você clicou no botão!');
-});
+// Função para alterar um texto da página ao clicar em um botão
+function mudarTexto() {
+  const titulo = document.getElementById("titulo-principal");
+  titulo.textContent = "Você clicou no botão!";
+}

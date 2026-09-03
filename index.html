@@ -3,221 +3,271 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Testador Virtual de Maquiagem</title>
+  <title>Glow & Delicate - Portal de Maquiagem</title>
   <style>
+    /* ESTILOS E DESIGN DELICADO (CSS) */
+    :root {
+      --bg-color: #faf6f0;
+      --card-bg: #ffffff;
+      --primary-pink: #e8b4b8;
+      --dark-pink: #c88a8f;
+      --text-dark: #4a423d;
+      --accent-gold: #d4af37;
+    }
+
     * {
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+
     body {
+      background-color: var(--bg-color);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--card-bg);
+      text-align: center;
+      padding: 2rem 1rem;
+      border-bottom: 1px solid #ebdada;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--dark-pink);
+      letter-spacing: 2px;
+      font-weight: 300;
+    }
+
+    nav {
       display: flex;
       justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background-color: #f4f4f9;
-      margin: 0;
+      gap: 20px;
+      margin-top: 1rem;
     }
-    .tester-container {
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--dark-pink);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      color: var(--dark-pink);
+      font-weight: 400;
+    }
+
+    /* GRID DE PASSO A PASSO E PRODUTOS */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      border: 1px solid #f0e2e2;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card h3 {
+      color: var(--dark-pink);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ÁREA INTERATIVA: QUIZ */
+    .quiz-container {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid #f0e2e2;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .quiz-option {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 20px;
+      background: var(--bg-color);
+      border: 1px solid var(--primary-pink);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .quiz-option:hover {
+      background: var(--primary-pink);
+      color: white;
+    }
+
+    .result-box {
+      margin-top: 1.5rem;
+      font-weight: bold;
+      color: var(--dark-pink);
+    }
+
+    /* ÁREA INTERATIVA: TESTADOR DE BATOM */
+    .tester-section {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid #f0e2e2;
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      max-width: 800px;
-      width: 100%;
-    }
-    .canvas-wrapper {
-      position: relative;
-      flex: 1;
-      min-width: 300px;
-      display: flex;
+      align-items: center;
       justify-content: center;
     }
-    canvas {
-      border-radius: 8px;
-      max-width: 100%;
-      height: auto;
-    }
-    .controls {
-      flex: 1;
-      min-width: 280px;
+
+    .lip-preview {
+      width: 150px;
+      height: 80px;
+      border-radius: 40px;
+      border: 2px solid #ddd;
       display: flex;
-      flex-direction: column;
-      gap: 15px;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: white;
+      transition: background-color 0.4s;
     }
-    .color-picker {
+
+    .color-palette {
       display: flex;
-      gap: 10px;
-      margin-top: 5px;
+      gap: 12px;
     }
-    .swatch {
+
+    .color-dot {
       width: 35px;
       height: 35px;
       border-radius: 50%;
-      border: 2px solid transparent;
       cursor: pointer;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-    .swatch:hover {
-      transform: scale(1.1);
-    }
-    .swatch.selected {
-      border-color: #333;
-    }
-    label {
-      font-weight: bold;
-      font-size: 14px;
-      color: #333;
-    }
-    input[type="range"] {
-      width: 100%;
-    }
-    .reset-btn {
-      margin-top: auto;
-      padding: 10px;
-      background-color: #333;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .reset-btn:hover {
-      background-color: #555;
+      border: 2px solid white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
 
-<div class="tester-container">
-  <div class="canvas-wrapper">
-    <canvas id="testerCanvas" width="400" height="500"></canvas>
-  </div>
+  <header>
+    <h1>GLOW & DELICATE</h1>
+    <nav>
+      <a href="#passo-a-passo">Passo a Passo</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#quiz">Quiz de Pele</a>
+      <a href="#testador">Testador Virtual</a>
+    </nav>
+  </header>
 
-  <div class="controls">
-    <h2>Testador Virtual</h2>
-    
-    <div>
-      <label>Cor do Batom:</label>
-      <div class="color-picker">
-        <div class="swatch" style="background-color: #b71c1c;" data-color="#b71c1c"></div>
-        <div class="swatch" style="background-color: #e91e63;" data-color="#e91e63"></div>
-        <div class="swatch" style="background-color: #8e24aa;" data-color="#8e24aa"></div>
-        <div class="swatch" style="background-color: #d81b60;" data-color="#d81b60"></div>
-        <div class="swatch" style="background-color: #c2185b;" data-color="#c2185b"></div>
+  <div class="container">
+
+    <!-- SEÇÃO PASSO A PASSO -->
+    <h2 id="passo-a-passo" class="section-title">Passo a Passo Essencial</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>1. Preparação</h3>
+        <p>Lave o rosto, aplique um tônico suave e um hidratante leve para garantir aderência.</p>
+      </div>
+      <div class="card">
+        <h3>2. Uniformização</h3>
+        <p>Aplique o primer nas áreas de poros e distribua a base do centro para as extremidades.</p>
+      </div>
+      <div class="card">
+        <h3>3. Olhos e Boca</h3>
+        <p>Esfume tons neutros no côncavo e finalize com o batom de sua preferência.</p>
       </div>
     </div>
 
-    <div>
-      <label for="opacitySlider">Intensidade (Opacidade):</label>
-      <input type="range" id="opacitySlider" min="0" max="1" step="0.05" value="0.6">
+    <!-- SEÇÃO VARIETÁRIA DE PRODUTOS -->
+    <h2 id="produtos" class="section-title">Guia de Produtos</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Bases Leves</h3>
+        <p>Ideais para o dia a dia, entregam viço natural e cobertura ajustável.</p>
+      </div>
+      <div class="card">
+        <h3>Blush em Creme</h3>
+        <p>Confere um ar saudável e delicado com acabamento hidratado.</p>
+      </div>
+      <div class="card">
+        <h3>Máscaras de Cílios</h3>
+        <p>Fórmulas alongadoras que destacam o olhar sem empelotar.</p>
+      </div>
     </div>
 
-    <button class="reset-btn" id="resetBtn">Remover Maquiagem</button>
+    <!-- INTERATIVIDADE 1: QUIZ RÁPIDO -->
+    <div id="quiz" class="quiz-container">
+      <h2 class="section-title">Descubra sua Base Ideal</h2>
+      <p>Qual é o seu tipo de pele?</p>
+      <div class="quiz-option" onclick="recomendarBase('oleosa')">Oleosa</div>
+      <div class="quiz-option" onclick="recomendarBase('seca')">Seca</div>
+      <div class="quiz-option" onclick="recomendarBase('mista')">Mista</div>
+      <div id="quizResult" class="result-box"></div>
+    </div>
+
+    <!-- INTERATIVIDADE 2: TESTADOR VIRTUAL -->
+    <h2 id="testador" class="section-title">Testador de Tons Labiais</h2>
+    <div class="tester-section">
+      <div id="lipPreview" class="lip-preview" style="background-color: #d8a7a7;">
+        Tom Selecionado
+      </div>
+      <div class="color-palette">
+        <div class="color-dot" style="background-color: #c85a5a;" onclick="trocarCor('#c85a5a')"></div>
+        <div class="color-dot" style="background-color: #b03a48;" onclick="trocarCor('#b03a48')"></div>
+        <div class="color-dot" style="background-color: #d68092;" onclick="trocarCor('#d68092')"></div>
+        <div class="color-dot" style="background-color: #8c3b4f;" onclick="trocarCor('#8c3b4f')"></div>
+      </div>
+    </div>
+
   </div>
-</div>
 
-<script>
-  const canvas = document.getElementById('testerCanvas');
-  const ctx = canvas.getContext('2d');
-  const opacitySlider = document.getElementById('opacitySlider');
-  const resetBtn = document.getElementById('resetBtn');
-  const swatches = document.querySelectorAll('.swatch');
+  <script>
+    /* LÓGICA INTERATIVA (JAVASCRIPT) */
 
-  let selectedColor = null;
-  let currentOpacity = parseFloat(opacitySlider.value);
-
-  // Coordenadas aproximadas dos lábios para a imagem de modelo genérica
-  const lipPath = [
-    {x: 160, y: 320}, {x: 180, y: 312}, {x: 200, y: 317}, 
-    {x: 220, y: 312}, {x: 240, y: 320}, {x: 225, y: 340}, 
-    {x: 200, y: 345}, {x: 175, y: 340}
-  ];
-
-  // Desenhar um rosto ilustrativo simples para testes
-  function drawBaseImage() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Fundo do rosto
-    ctx.fillStyle = '#f5d6c6';
-    ctx.beginPath();
-    ctx.ellipse(200, 240, 110, 150, 0, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Olhos
-    ctx.fillStyle = '#333';
-    ctx.beginPath();
-    ctx.ellipse(160, 210, 12, 6, 0, 0, Math.PI * 2);
-    ctx.ellipse(240, 210, 12, 6, 0, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Sobrancelhas
-    ctx.strokeStyle = '#5a3d28';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(145, 195); ctx.lineTo(175, 195);
-    ctx.moveTo(225, 195); ctx.lineTo(255, 195);
-    ctx.stroke();
-
-    // Linha da boca original
-    ctx.strokeStyle = '#d4a397';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(160, 320); ctx.lineTo(240, 320);
-    ctx.stroke();
-  }
-
-  // Desenhar a camada de batom
-  function applyMakeup() {
-    drawBaseImage();
-
-    if (!selectedColor) return;
-
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(lipPath[0].x, lipPath[0].y);
-    
-    for (let i = 1; i < lipPath.length; i++) {
-      ctx.lineTo(lipPath[i].x, lipPath[i].y);
+    // Quiz de Recomendação
+    function recomendarBase(tipoPele) {
+      const resultDiv = document.getElementById('quizResult');
+      if(tipoPele === 'oleosa') {
+        resultDiv.innerText = "Recomendação: Base Matte com acabamento toque seco e sem óleo.";
+      } else if(tipoPele === 'seca') {
+        resultDiv.innerText = "Recomendação: Base Serum ou Fluida com ácido hialurônico.";
+      } else {
+        resultDiv.innerText = "Recomendação: Base Semi-matte ou Satin para equilíbrio natural.";
+      }
     }
-    ctx.closePath();
 
-    // Aplica o modo de mesclagem para parecer maquiagem real
-    ctx.globalCompositeOperation = 'multiply';
-    ctx.globalAlpha = currentOpacity;
-    ctx.fillStyle = selectedColor;
-    ctx.fill();
-    ctx.restore();
-  }
-
-  // Eventos das paletas de cor
-  swatches.forEach(swatch => {
-    swatch.addEventListener('click', (e) => {
-      swatches.forEach(s => s.classList.remove('selected'));
-      e.target.classList.add('selected');
-      selectedColor = e.target.getAttribute('data-color');
-      applyMakeup();
-    });
-  });
-
-  // Evento do Slider de Opacidade
-  opacitySlider.addEventListener('input', (e) => {
-    currentOpacity = parseFloat(e.target.value);
-    applyMakeup();
-  });
-
-  // Botão Limpar
-  resetBtn.addEventListener('click', () => {
-    selectedColor = null;
-    swatches.forEach(s => s.classList.remove('selected'));
-    drawBaseImage();
-  });
-
-  // Inicializa o desenho
-  drawBaseImage();
-</script>
-
+    // Testador Virtual de Batom
+    function trocarCor(cor) {
+      const preview = document.getElementById('lipPreview');
+      preview.style.backgroundColor = cor;
+    }
+  </script>
 </body>
 </html>
