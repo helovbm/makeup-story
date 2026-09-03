@@ -1,22 +1,22 @@
 /* Estilizando o corpo da página */
 body {
-  background-color: #f0f0f0;
+  background-color: #f9f9f9;
   font-family: Arial, sans-serif;
   color: #333333;
 }
 
-/* Estilizando um título principal */
+/* Estilizando um título */
 h1 {
-  color: #0066cc;
+  color: #d8a7a7;
   text-align: center;
 }
 
 /* Estilizando um botão */
 .botao {
-  background-color: #28a745;
+  background-color: #e8b4b8;
   color: white;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
 }
