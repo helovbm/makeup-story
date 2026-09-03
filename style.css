@@ -1,22 +1,239 @@
-/* Estilizando o corpo da página */
-body {
-  background-color: #f9f9f9;
-  font-family: Arial, sans-serif;
-  color: #333333;
+/* PALETA E IDENTIDADE OCÉANE */
+:root {
+  --bg-main: #FFFFFF;
+  --bg-card: #F9F9F9;
+  --text-dark: #111111;
+  --text-muted: #666666;
+  --accent-nude: #D8A7A7;
+  --border-color: #E5E5E5;
 }
 
-/* Estilizando um título */
-h1 {
-  color: #d8a7a7;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+/* BARRA SUPERIOR */
+.top-bar {
+  background-color: var(--text-dark);
+  color: white;
+  text-align: center;
+  padding: 8px;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* CABEÇALHO */
+header {
+  text-align: center;
+  padding: 2.5rem 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+header h1 {
+  font-size: 2.2rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: var(--text-dark);
+}
+
+/* NAVEGAÇÃO POR ABAS */
+.tabs-nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  background-color: var(--bg-main);
+  padding: 15px;
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text-dark);
+}
+
+.tab-btn.active {
+  color: var(--text-dark);
+  border-bottom-color: var(--text-dark);
+}
+
+/* CONTEÚDO DAS ABAS */
+.container {
+  max-width: 1100px;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--text-dark);
+}
+
+/* GRID DE CARDS COM IMAGEM */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-body h3 {
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+.card-body p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ÁREA INTERATIVA: TESTADOR DE CORES */
+.tester-container {
+  background: var(--bg-card);
+  padding: 3rem 2rem;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-box {
   text-align: center;
 }
 
-/* Estilizando um botão */
-.botao {
-  background-color: #e8b4b8;
+.lip-preview {
+  width: 200px;
+  height: 100px;
+  border-radius: 50px;
+  border: 2px solid white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
+  font-weight: 600;
+  transition: background-color 0.4s ease;
+  margin-bottom: 12px;
+}
+
+.color-palette {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.color-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.color-dot:hover {
+  transform: scale(1.15);
+}
+
+/* ÁREA INTERATIVA: QUIZ */
+.quiz-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.quiz-option {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 28px;
+  background: var(--bg-main);
+  border: 1px solid var(--text-dark);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quiz-option:hover {
+  background: var(--text-dark);
+  color: white;
+}
+
+.result-box {
+  margin-top: 2rem;
+  padding: 20px;
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  font-size: 0.95rem;
+  color: var(--text-dark);
 }

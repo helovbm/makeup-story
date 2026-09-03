@@ -3,239 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glow Beauty - Portal de Maquiagem</title>
-  <style>
-    /* ESTILOS CSS */
-    :root {
-      --bg-color: #faf6f0;
-      --card-bg: #ffffff;
-      --primary-pink: #e8b4b8;
-      --dark-pink: #c88a8f;
-      --text-dark: #4a423d;
-      --accent-gold: #d4af37;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
-
-    header {
-      background-color: var(--card-bg);
-      text-align: center;
-      padding: 2.5rem 1rem 1.5rem;
-      border-bottom: 1px solid #ebdada;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      color: var(--dark-pink);
-      letter-spacing: 2px;
-      font-weight: 300;
-      margin-bottom: 0.5rem;
-    }
-
-    header p {
-      font-size: 1rem;
-      color: #8a7e78;
-    }
-
-    /* NAVEGAÇÃO POR ABAS */
-    .tabs-nav {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      background-color: var(--card-bg);
-      padding: 10px;
-      border-bottom: 1px solid #f0e2e2;
-      flex-wrap: wrap;
-    }
-
-    .tab-btn {
-      background: none;
-      border: none;
-      padding: 12px 24px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      cursor: pointer;
-      border-radius: 20px;
-      transition: all 0.3s ease;
-    }
-
-    .tab-btn:hover {
-      background-color: #f7e8e8;
-      color: var(--dark-pink);
-    }
-
-    .tab-btn.active {
-      background-color: var(--primary-pink);
-      color: white;
-    }
-
-    /* CONTEÚDO DAS ABAS */
-    .container {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    .tab-content {
-      display: none; /* Esconde todas as abas por padrão */
-    }
-
-    .tab-content.active {
-      display: block; /* Exibe apenas a aba ativa */
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 1.5rem;
-      font-size: 1.8rem;
-      color: var(--dark-pink);
-      font-weight: 400;
-    }
-
-    /* GRIDS DE CARDS COM IMAGEM */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-      border: 1px solid #f0e2e2;
-      transition: transform 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-    }
-
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .card-body {
-      padding: 1.5rem;
-    }
-
-    .card-body h3 {
-      color: var(--dark-pink);
-      margin-bottom: 0.5rem;
-    }
-
-    /* ÁREA INTERATIVA 1: TESTADOR VIRTUAL */
-    .tester-container {
-      background: var(--card-bg);
-      padding: 2rem;
-      border-radius: 12px;
-      border: 1px solid #f0e2e2;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .preview-box {
-      text-align: center;
-    }
-
-    .lip-preview {
-      width: 180px;
-      height: 90px;
-      border-radius: 45px;
-      border: 3px solid #fff;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      color: white;
-      font-weight: bold;
-      transition: background-color 0.4s;
-      margin-bottom: 10px;
-    }
-
-    .color-palette {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin-top: 15px;
-    }
-
-    .color-dot {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 2px solid white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-      transition: transform 0.2s;
-    }
-
-    .color-dot:hover {
-      transform: scale(1.15);
-    }
-
-    /* ÁREA INTERATIVA 2: QUIZ */
-    .quiz-container {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 2rem;
-      border: 1px solid #f0e2e2;
-      text-align: center;
-    }
-
-    .quiz-option {
-      display: inline-block;
-      margin: 8px;
-      padding: 10px 22px;
-      background: var(--bg-color);
-      border: 1px solid var(--primary-pink);
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: 500;
-    }
-
-    .quiz-option:hover {
-      background: var(--primary-pink);
-      color: white;
-    }
-
-    .result-box {
-      margin-top: 1.5rem;
-      padding: 15px;
-      border-radius: 8px;
-      background-color: var(--bg-color);
-      font-weight: 600;
-      color: var(--dark-pink);
-    }
-  </style>
+  <title>Océane Inspired - Beauty Portal</title>
+  <!-- Vínculo com o arquivo CSS externo -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <div class="top-bar">A BELEZA AO SEU ALCANCE • FRETE GRÁTIS EM COMPRAS SELECIONADAS</div>
+
   <header>
-    <h1>GLOW BEAUTY</h1>
-    <p>Seu guia de maquiagem moderno e delicado</p>
+    <h1>OCÉANE STYLE</h1>
   </header>
 
+  <!-- MENU DE NAVEGAÇÃO POR ABAS -->
   <nav class="tabs-nav">
     <button class="tab-btn active" onclick="openTab(event, 'passo-a-passo')">Passo a Passo</button>
     <button class="tab-btn" onclick="openTab(event, 'produtos')">Produtos</button>
@@ -245,89 +25,93 @@
 
   <div class="container">
 
+    <!-- ABA 1: PASSO A PASSO -->
     <div id="passo-a-passo" class="tab-content active">
-      <h2 class="section-title">Tutoriais Passo a Passo</h2>
+      <h2 class="section-title">Rotina Passo a Passo</h2>
       <div class="grid">
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&q=80" alt="Preparação de Pele">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80" alt="Preparação de Pele">
           <div class="card-body">
-            <h3>1. Skincare Pré-Make</h3>
-            <p>Limpe, tonifique e hidrate bem a pele para que a maquiagem dure o dia todo sem craquelar.</p>
+            <h3>1. Preparação Skincare</h3>
+            <p>Limpeza profunda e hidratação com ácido hialurônico para garantir o viço natural antes do produto.</p>
           </div>
         </div>
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=500&q=80" alt="Pele Leve e Natural">
+          <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&q=80" alt="Aplicação de Base">
           <div class="card-body">
-            <h3>2. Cobertura Uniforme</h3>
-            <p>Aplique a base do centro para as bordas do rosto usando uma esponja úmida para acabamento natural.</p>
+            <h3>2. Uniformização</h3>
+            <p>Aplique o corretivo apenas nas áreas necessárias e espalhe com esponja de acabamento aveludado.</p>
           </div>
         </div>
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1583241800698-e8ab01c85b27?w=500&q=80" alt="Maquiagem nos Olhos">
+          <img src="https://images.unsplash.com/photo-1583241800698-e8ab01c85b27?w=600&q=80" alt="Olhos e Boca">
           <div class="card-body">
-            <h3>3. Olhos Esfumados</h3>
-            <p>Use tons terrosos no côncavo para criar profundidade e finalize com máscara de cílios.</p>
+            <h3>3. Ponto de Cor</h3>
+            <p>Finalize com sombra esfumada neutra, iluminador nas maçãs do rosto e gloss de alto brilho.</p>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ABA 2: PRODUTOS -->
     <div id="produtos" class="tab-content">
-      <h2 class="section-title">Catálogo de Indicações</h2>
+      <h2 class="section-title">Nossos Favoritos</h2>
       <div class="grid">
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=500&q=80" alt="Bases e Corretivos">
+          <img src="https://oceane.vtexassets.com/arquivos/ids/211541/K1519_kit_paleta_de_sombras_desire_batom_marrom_ocane_edition_2.jpg?v=638689976331670000" alt="Paleta Océane Desire">
           <div class="card-body">
-            <h3>Bases Fluídas</h3>
-            <p>Ideais para quem busca cobertura leve a média com viço e aspecto de pele saudável.</p>
+            <h3>Paleta de Sombras</h3>
+            <p>Tons altamente pigmentados com acabamento cintilante e matte para todas as ocasiões.</p>
           </div>
         </div>
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500&q=80" alt="Paleta de Sombras">
+          <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&q=80" alt="Pincéis e Esponjas">
           <div class="card-body">
-            <h3>Paletas Neutras</h3>
-            <p>Versáteis para criar desde maquiagens simples de trabalho até looks elaborados para a noite.</p>
+            <h3>Acessórios de Precisão</h3>
+            <p>Pincéis com cerdas macias e esponjas anatômicas para uma aplicação perfeita.</p>
           </div>
         </div>
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=500&q=80" alt="Batons e Lip Gloss">
+          <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&q=80" alt="Batons e Lip Gloss">
           <div class="card-body">
-            <h3>Glosses & Lip Oils</h3>
-            <p>Hidratam os lábios enquanto entregam brilho delicado e sensação confortável.</p>
+            <h3>Lip Tint & Gloss</h3>
+            <p>Fórmulas leves e confortáveis que garantem cor duradoura e hidratação profunda.</p>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ABA 3: TESTADOR VIRTUAL -->
     <div id="testador" class="tab-content">
-      <h2 class="section-title">Testador de Tons de Batom</h2>
+      <h2 class="section-title">Testador de Batons Océane</h2>
       <div class="tester-container">
         <div class="preview-box">
-          <div id="lipPreview" class="lip-preview" style="background-color: #d8a7a7;">
-            Tom Selecionado
+          <div id="lipPreview" class="lip-preview" style="background-color: #8C3B4F;">
+            Nude Nude
           </div>
-          <p id="colorName">Nude Clássico</p>
+          <p id="colorName" style="font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;">Ameixa Amadeirado</p>
         </div>
         <div>
-          <p style="margin-bottom: 10px; font-weight: 600;">Clique nas cores para testar:</p>
+          <p style="margin-bottom: 12px; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 600;">Selecione uma tonalidade:</p>
           <div class="color-palette">
-            <div class="color-dot" style="background-color: #c85a5a;" onclick="trocarCor('#c85a5a', 'Vermelho Suave')"></div>
-            <div class="color-dot" style="background-color: #b03a48;" onclick="trocarCor('#b03a48', 'Vinho Elegante')"></div>
-            <div class="color-dot" style="background-color: #d68092;" onclick="trocarCor('#d68092', 'Rosa Queimado')"></div>
-            <div class="color-dot" style="background-color: #8c3b4f;" onclick="trocarCor('#8c3b4f', 'Ameixa Amadeirado')"></div>
-            <div class="color-dot" style="background-color: #d8a7a7;" onclick="trocarCor('#d8a7a7', 'Nude Clássico')"></div>
+            <div class="color-dot" style="background-color: #C85A5A;" onclick="trocarCor('#C85A5A', 'Vermelho Marcante')"></div>
+            <div class="color-dot" style="background-color: #B03A48;" onclick="trocarCor('#B03A48', 'Vinho Nude')"></div>
+            <div class="color-dot" style="background-color: #D68092;" onclick="trocarCor('#D68092', 'Rosa Rose')"></div>
+            <div class="color-dot" style="background-color: #8C3B4F;" onclick="trocarCor('#8C3B4F', 'Ameixa Amadeirado')"></div>
+            <div class="color-dot" style="background-color: #D8A7A7;" onclick="trocarCor('#D8A7A7', 'Nude Clássico')"></div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ABA 4: QUIZ -->
     <div id="quiz" class="tab-content">
-      <h2 class="section-title">Quiz: Descubra os Produtos para Sua Pele</h2>
+      <h2 class="section-title">Diagnóstico de Pele</h2>
       <div class="quiz-container">
-        <p style="margin-bottom: 15px;">Qual é o seu tipo principal de pele?</p>
-        <div class="quiz-option" onclick="recomendarBase('oleosa')">Oleosa</div>
-        <div class="quiz-option" onclick="recomendarBase('seca')">Seca</div>
-        <div class="quiz-option" onclick="recomendarBase('mista')">Mista / Normal</div>
+        <p style="margin-bottom: 20px; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">Qual é o acabamento desejado para sua maquiagem?</p>
+        <div class="quiz-option" onclick="recomendarBase('matte')">Matte Veludado</div>
+        <div class="quiz-option" onclick="recomendarBase('glow')">Glow Iluminado</div>
+        <div class="quiz-option" onclick="recomendarBase('natural')">Natural Segunda Pele</div>
         
         <div id="quizResult" class="result-box" style="display: none;"></div>
       </div>
@@ -335,46 +119,7 @@
 
   </div>
 
-  <script>
-    /* LÓGICA JAVASCRIPT */
-
-    // Alternar entre as Abas
-    function openTab(evt, tabId) {
-      // Esconde todos os conteúdos das abas
-      const tabContents = document.querySelectorAll('.tab-content');
-      tabContents.forEach(content => content.classList.remove('active'));
-
-      // Remove a classe 'active' de todos os botões
-      const tabButtons = document.querySelectorAll('.tab-btn');
-      tabButtons.forEach(btn => btn.classList.remove('active'));
-
-      // Mostra a aba atual e adiciona a classe 'active' ao botão clicado
-      document.getElementById(tabId).classList.add('active');
-      evt.currentTarget.classList.add('active');
-    }
-
-    // Testador Virtual de Batom
-    function trocarCor(hexColor, nomeCor) {
-      const preview = document.getElementById('lipPreview');
-      const label = document.getElementById('colorName');
-      
-      preview.style.backgroundColor = hexColor;
-      label.innerText = nomeCor;
-    }
-
-    // Quiz de Recomendação
-    function recomendarBase(tipoPele) {
-      const resultDiv = document.getElementById('quizResult');
-      resultDiv.style.display = 'block';
-
-      if(tipoPele === 'oleosa') {
-        resultDiv.innerText = "Recomendação: Aposte em bases matte sem óleo (oil-free), pó translúcido e primer com efeito máficos/poros.";
-      } else if(tipoPele === 'seca') {
-        resultDiv.innerText = "Recomendação: Escolha bases fluídas com ácido hialurônico, blushes cremosos e bruma hidratante para finalizar.";
-      } else {
-        resultDiv.innerText = "Recomendação: Utilize bases de acabamento acetinado e sele com pó apenas a zona T (testa, nariz e queixo).";
-      }
-    }
-  </script>
+  <!-- Vínculo com o arquivo JavaScript externo -->
+  <script src="script.js"></script>
 </body>
 </html>
